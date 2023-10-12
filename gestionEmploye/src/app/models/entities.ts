@@ -1,27 +1,15 @@
-export interface User {
-    username: string
-    password:string
-    roles:Role[]
-}
+import { Personne } from "./Personne";
 
 export interface Role {
-    id: string
-    name:string
+    id?: string
+    name?:string
 
 }
 
 
-export interface Entreprise {
-    id:any
-    companyName:string;
-}
-
-export interface Personne {
-    id:any
-    firstName:string;
-    lastName:string;
-    dateOfBirth:string;
-    posteActuel:string;
+export class Entreprise {
+    id?:any
+    companyName?:string;
 }
 
 export interface PersonneEntreprise {

@@ -3,9 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {environment} from '../environments';
-import * as jwt_decode from 'jwt-decode';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import {Entreprise,Personne, User} from "../models/entities";
+import { Personne } from "../models/Personne";
 
 
 
@@ -13,7 +11,7 @@ import {Entreprise,Personne, User} from "../models/entities";
   providedIn: 'root'
 })
 export class AuthService {
-  private currentUserSubject: BehaviorSubject<any>;
+ /* private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
   public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   constructor(private http: HttpClient, private helper: JwtHelperService) {
@@ -25,8 +23,8 @@ export class AuthService {
   public get currentUserValue(): any {
     return this.currentUserSubject.value;
   }
-  login(admin: User) {
-    return this.http.post<Observable<any>>(`${environment.springURL}/api/auth/signin`, admin)
+  login(personne: Personne) {
+    return this.http.post<Observable<any>>(`${environment.springURL}/api/user/sign-in`, personne)
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentUser', JSON.stringify(user));
@@ -41,5 +39,29 @@ export class AuthService {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
     this.isUserLoggedIn.next(false);
+  }
+
+*/
+  constructor(private httpClient : HttpClient) { }
+
+  authenticate(personne: Personne) {
+    return this.httpClient.post<Observable<any>>(`${environment.springURL}/api/user/sign-in`, personne)
+      .pipe(
+        map(userData => {
+          // let tokenStr = "Bearer " + userData.token;
+          // sessionStorage.setItem("token", tokenStr);
+          return userData;
+        })
+      );
+  }
+
+  isUserLoggedIn() {
+    let user = sessionStorage.getItem("username");
+    console.log(!(user === null));
+    return !(user === null);
+  }
+
+  logOut() {
+    sessionStorage.removeItem("username");
   }
 }
