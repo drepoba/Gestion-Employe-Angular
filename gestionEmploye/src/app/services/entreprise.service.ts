@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {MessageService} from "./message.service";
+
 import {Observable, of, Subject} from "rxjs";
-import {Resultat} from "../models/resultat";
-import {environment} from "../../environments/environment";
-import {Entreprise} from "../models/Entreprise";
+import {environment} from "../../app/environments";
+import {Entreprise} from "../models/entities";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EntrepriseService {
 // observables sources
-  private entrepriseCreerSource = new Subject<Resultat<Entreprise>>();
-  private entrepriseModifSource = new Subject<Resultat<Entreprise>>();
+  private entrepriseCreerSource = new Subject<Entreprise>();
+  private entrepriseModifSource = new Subject<Entreprise>();
   private entrepriseFiltreSource = new Subject<string>();
-  private entrepriseSupprimeSource = new Subject<Resultat<boolean>>();
+  private entrepriseSupprimeSource = new Subject<boolean>();
 
 
 // observables streams
@@ -23,66 +22,26 @@ export class EntrepriseService {
   entrepriseFiltre$ = this.entrepriseFiltreSource.asObservable();
   entrepriseSupprime$ = this.entrepriseSupprimeSource.asObservable();
 
-  constructor(private  http: HttpClient, private messageService: MessageService) {
+  constructor(private  http: HttpClient) {
   }
 
-  getAllEntreprise(): Observable<Resultat<Entreprise[]>> {
-    return this.http.get<Resultat<Entreprise[]>>(`${environment.apiUrl}/api/entreprise`);
+  getAllEntreprise(): Observable<Entreprise[]> {
+    return this.http.get<Entreprise[]>(`${environment.springURL}/api/entreprise`);
   }
 
-  ajoutEntreprise(entreprise: Entreprise): Observable<Resultat<Entreprise>> {
+  ajoutEntreprise(entreprise: Entreprise): Observable<Entreprise> {
     console.log('methode du service qui ajoute  entreprise', entreprise);
-    return this.http.post<Resultat<Entreprise>>(`${environment.apiUrl}/api/entreprise`, entreprise);
+    return this.http.post<Entreprise>(`${environment.springURL}/api/entreprise`, entreprise);
   }
-  modifEntreprise(entreprise: Entreprise): Observable<Resultat<Entreprise>> {
+  modifEntreprise(entreprise: Entreprise): Observable<Entreprise> {
     console.log('methode du service qui modifier categorie', entreprise);
-    return this.http.put<Resultat<Entreprise>>(`${environment.apiUrl}/api/entreprise`, entreprise);
+    return this.http.put<Entreprise>(`${environment.springURL}/api/entreprise`, entreprise);
   }
-  getEntrepriseById(id: Entreprise): Observable<Resultat<Entreprise>> {
-    return this.http.get<Resultat<Entreprise>>(`${environment.apiUrl}/api/entreprise/${id}`);
+  getEntrepriseById(id: Entreprise): Observable<Entreprise> {
+    return this.http.get<Entreprise>(`${environment.springURL}/api/entreprise/${id}`);
   }
   supprimerEntreprise(id: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/api/entreprise/${id}`);
+    return this.http.delete(`${environment.springURL}/api/entreprise/${id}`);
 
-  }
-
-  entrepriseCreer(res: Resultat<Entreprise>) {
-    console.log('entreprise a ete  creer correctement essaie source');
-    this.entrepriseCreerSource.next(res);
-  }
-
-  entrepriseModif(res: Resultat<Entreprise>) {
-    this.entrepriseModifSource.next(res);
-  }
-
-  filtreentreprise(text: string) {
-    this.entrepriseFiltreSource.next(text);
-  }
-
-  categorieSupprime(res: Resultat<boolean>) {
-    this.entrepriseSupprimeSource.next(res);
-  }
-
-  private log(message: string) {
-    this.messageService.add('categorieService: ' + message);
-
-  }
-
-  ///////////////////////////////////////////
-  // recuper les erreurs
-
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-
-      console.error(error);
-
-
-      this.log(`${operation} non disponible: ${error.message}`);
-
-
-      return of(result as T);
-    };
   }
 }
