@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {environment} from '../../environments/environments';
+import {environment} from '../environments';
 import * as jwt_decode from 'jwt-decode';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {Admin} from "../models/Admin";
-import {Entreprise,Personne} from "../models/entities";
+import {Entreprise,Personne, User} from "../models/entities";
 
 
 
@@ -26,8 +25,8 @@ export class AuthService {
   public get currentUserValue(): any {
     return this.currentUserSubject.value;
   }
-  login(admin: Admin) {
-    return this.http.post<Observable<any>>(`${environment.apiUrl}/api/auth/signin`, admin)
+  login(admin: User) {
+    return this.http.post<Observable<any>>(`${environment.springURL}/api/auth/signin`, admin)
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentUser', JSON.stringify(user));
@@ -35,38 +34,7 @@ export class AuthService {
         return user;
       }));
   }
-  loginManager(manager: Manager) {
-    return this.http.post<Observable<any>>(`${environment.apiUrl}/api/auth/signin`, manager)
-      .pipe(map(res => {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify(res.body.body.accessToken));
-        this.currentUserSubject.next(res.body.body.accessToken);
 
-        const decoded = jwt_decode(res.body.body.accessToken);
-        const exp = this.helper.isTokenExpired(res.body.body.accessToken);
-        console.log(exp);
-        console.log(decoded.exp);
-        console.log(res);
-        this.isUserLoggedIn.next(true);
-        return res;
-      }));
-  }
-  loginEmploye(employe: Employe) {
-    return this.http.post<Observable<any>>(`${environment.apiUrl}/api/auth/signin`, employe)
-      .pipe(map(res => {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify(res.body.body.accessToken));
-        this.currentUserSubject.next(res.body.body.accessToken);
-
-        const decoded = jwt_decode(res.body.body.accessToken);
-        const exp = this.helper.isTokenExpired(res.body.body.accessToken);
-        console.log(exp);
-        console.log(decoded.exp);
-        console.log(res);
-        this.isUserLoggedIn.next(true);
-        return res;
-      }));
-  }
 
   logout() {
     // remove user from local storage to log user out
