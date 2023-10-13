@@ -42,5 +42,15 @@ export class PersonneService {
 
     return this.http.post(environment.springURL+"/api/personnes/add", data, { headers });
   }
+
+   // Cette fonction effectue un post en incluant le token dans les en-têtes
+   listData( token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get(environment.springURL+"/api/personnes/all-persons-emplois", { headers });
+  }
   
 }
