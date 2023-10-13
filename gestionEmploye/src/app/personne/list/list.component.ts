@@ -33,7 +33,6 @@ export class ListComponent {
     .subscribe({
       next: (data: any) => {
         this.listePersonne=data;
-       this.alertWithSuccess()
       this.router.navigate(['/home']);
       },
       error: (erreur: any) => {

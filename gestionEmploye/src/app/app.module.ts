@@ -11,6 +11,10 @@ import { EntrepriseComponent } from './entreprise/entreprise.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AddComponent } from './personne/add/add.component';
 import { ListComponent } from './personne/list/list.component';
+import { AffectationEmploiComponent } from './employe/affectation-emploi/affectation-emploi.component';
+import { ListEmployeComponent } from './employe/list-employe/list-employe.component';
+import { ListEntrepriseComponent } from './entreprise/list-entreprise/list-entreprise.component';
+import { AffectationPersonneEmploiComponent } from './personne/affectation-personne-emploi/affectation-personne-emploi.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,11 @@ import { ListComponent } from './personne/list/list.component';
     SignupComponent,
     EntrepriseComponent,
     AddComponent,
-    ListComponent
+    ListComponent,
+    AffectationEmploiComponent,
+    ListEmployeComponent,
+    ListEntrepriseComponent,
+    AffectationPersonneEmploiComponent
   ],
   imports: [
     BrowserModule,

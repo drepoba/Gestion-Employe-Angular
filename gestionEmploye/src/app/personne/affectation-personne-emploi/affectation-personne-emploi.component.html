@@ -1,0 +1,49 @@
+<div class="content" style="padding:3px 5px !important;">
+    <div class="card" style="width:100% !important; margin:auto; margin-top:45px !important;">
+      <h3 class="page-header" style="text-align: center;">Affectation Personne</h3>
+    </div>
+  </div>
+        <form #f="ngForm">
+          <div class="modal-header">
+            <div class="row" style="width:100% !important; margin:auto;">
+              <div class="col-xs-12 col-md-10">
+                <h3 class="modal-title">Formulaire d'affectation</h3>
+              </div>
+            </div>
+          </div>
+          <div class="body">
+            <div class="row" style="width:100% !important; margin:auto !important;">
+
+              <div  class="col-xs-12 col-md-12" style="margin-bottom: 15px !important;">
+                <label class="label-test" for="sltGenre">Entreprise<span class="etoile text-danger">*</span>
+                  &nbsp;
+                  <span  class="text-danger">champ vide</span>
+                </label>
+                <select [(ngModel)]="entreprise" class="form-control" id="sltGenre" name="entreprise"   required>
+                  <option value="">Sélectionner l'entreprise</option>
+                  <option value=""></option>
+                </select>
+              </div>
+              <div  class="col-xs-12 col-md-12" style="margin-bottom: 15px !important;">
+                  <label class="label-test" for="sltGenre">Employe<span class="etoile text-danger">*</span>
+                    &nbsp;
+                    <span  class="text-danger">champ vide</span>
+                  </label>
+                  <select [(ngModel)]="employe" class="form-control" id="sltGenre" name="employe" required>
+                    <option value="">Sélectionnez personne</option>
+                    <option value=""></option>
+                  </select>
+                </div>
+              
+            </div>
+          </div>
+          <div class="" style="background: linear-gradient(to right, #eae4e4, #ffc80030);">
+            <button (click)="confirmSave()"  [disabled]="!f.valid" class="modal-save-btn btn btn-outline-success" id="btn-save-typeordonnateur" type="button">
+              Enregistrer
+            </button>
+          </div>
+        </form>
+      
+  
+  
+ 

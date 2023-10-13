@@ -1,0 +1,64 @@
+<div class="content" style="padding:3px 5px !important;">
+  <div class="card" style="width:100% !important; margin:auto; ">
+    <h3 class="page-header" style="text-align: center;">Liste Employes</h3>
+  </div>
+</div>
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header table-heading" style="background: linear-gradient(to right, #eae4e4, #ffc80030);">
+            <div class="panel-heading-btn row">
+              <div class="col-md-8 col-xs-12">
+                <button routerLink="/affectation-employe-nouvelle-entreprise" class="btn btn-add" style="border: 1px solid green; background: green; color: white;">
+                  <i class="fa fa-plus-square"></i>
+                  Nouvel Affectation
+                </button>
+              </div>
+              <div class="col-md-2 ms-auto">
+                <input  class="form-control input-sm" id="filtrerDebut" name="filtrerDebut" placeholder="date debut" type="date"/>
+              </div>
+              <div class="col-md-2 ms-auto">
+                <input  class="form-control input-sm" id="filtrerFin" name="filtrerFin" placeholder="date fin" type="date"/>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+             <table class="table">
+               <thead class="bg-black text-white">
+                <tr>
+                   <td>#Id</td>
+                   <td>Nom</td>
+                   <td>Prénom</td>
+                   <td>Poste actuel</td>
+                   <td>Entreprise</td>
+                   <td>Date Debut</td>
+                   <td>Date Fin</td>
+                </tr>
+               </thead>
+               <tbody>
+                <tr *ngIf="listeEmploye.length == 0">
+                  <td colspan="5">Il y'a aucune donnée dans votre système</td>
+                </tr>
+                <div *ngIf="listeEmploye.length != 0">
+                  <tr  *NgFor="let persone in listeEmploye " >
+                    <td >{{persone.id}}</td>
+                    <td >{{persone.fistName}}</td>
+                    <td >{{persone.lastName}}</td>
+                    <td >{{persone.postActuel}}</td>
+                    <td >{{persone.postActuel}}</td>
+                    <td >{{persone.dateBegin}}</td>
+                    <td >{{persone.dateEnd}}</td>
+                  </tr>
+                </div>
+  
+               </tbody>
+             </table>
+  
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
