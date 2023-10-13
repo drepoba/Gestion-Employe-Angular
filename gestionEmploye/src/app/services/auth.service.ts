@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {environment} from '../environments';
 import { Personne } from "../models/Personne";
+import { User } from '../models/user';
 
 
 
@@ -44,12 +45,12 @@ export class AuthService {
 */
   constructor(private httpClient : HttpClient) { }
 
-  authenticate(personne: Personne) {
-    return this.httpClient.post<Observable<any>>(`${environment.springURL}/api/user/sign-in`, personne)
+  authenticate(user: User) {
+    return this.httpClient.post<Observable<any>>(`${environment.springURL}/api/user/sign-in`, user)
       .pipe(
         map(userData => {
           // let tokenStr = "Bearer " + userData.token;
-          // sessionStorage.setItem("token", tokenStr);
+           //sessionStorage.setItem("token", tokenStr);
           return userData;
         })
       );

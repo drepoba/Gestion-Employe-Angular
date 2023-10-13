@@ -1,1 +1,12 @@
-<p>entreprise works!</p>
+<div class="container">
+    <div class="container mt-5">
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="entreprise.companyName">Nom de l'entreprise</label>
+          <input type="text" class="form-control" id="entreprise.companyname" [(ngModel)]="entreprise.companyname" name="entreprise.companyname" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+  

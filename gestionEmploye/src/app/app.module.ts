@@ -9,6 +9,8 @@ import { MenuComponent } from './menu/menu.component';
 import { SignupComponent } from './signup/signup.component';
 import { EntrepriseComponent } from './entreprise/entreprise.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { AddComponent } from './personne/add/add.component';
+import { ListComponent } from './personne/list/list.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     LoginComponent,
     MenuComponent,
     SignupComponent,
-    EntrepriseComponent
+    EntrepriseComponent,
+    AddComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,

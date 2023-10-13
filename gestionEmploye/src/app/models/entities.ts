@@ -8,8 +8,8 @@ export interface Role {
 
 
 export class Entreprise {
-    id?:any
-    companyName?:string;
+    id?:number
+    companyname?:string;
 }
 
 export interface PersonneEntreprise {

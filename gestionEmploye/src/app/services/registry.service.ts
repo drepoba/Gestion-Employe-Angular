@@ -13,11 +13,10 @@ export class RegistryService {
   constructor(private httpClient: HttpClient) {
 
    }
-
  
-   signUp(user: User): Observable<User> {
-    console.log('methode du service qui ajoute un employe', user);
-    return this.httpClient.post<User>('http://localhost:8081/api/user/sign-up',user); 
+   signUp(personne:Personne): Observable<Personne> {
+    console.log('methode du service qui ajoute un employe', personne);
+    return this.httpClient.post<Personne>('http://localhost:8081/api/user/sign-up',personne); 
   }
 
   login(user: User) {

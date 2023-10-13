@@ -9,6 +9,9 @@ import { FormGroup,FormBuilder,FormControl} from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
 
+declare var $: any;
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -37,7 +40,7 @@ export class LoginComponent {
     this.p= new AuthRequest(this.form.value["username"],this.form.value["password"]);
     
    console.log(this.p);
-    this.registryService.login(this.p).subscribe({
+    this.auth.authenticate(this.p).subscribe({
      next: (data: any) => {
        // Traitement des données reçues
        console.log(data);
@@ -48,11 +51,15 @@ export class LoginComponent {
      }, error: err => {
        this.errorMessage = err.error.message;
        this.isLoginFailed = true;
+       this.alertWithErreur();
      }
     })
    console.log(this.form?.value)
  }
 
+ alertWithErreur(){
+  Swal.fire('Erreur', 'login ou mot de passe incorrecte !', 'error')
+}
  
 }
 

@@ -1,39 +1,33 @@
 import { Component } from '@angular/core';
-import { EntrepriseService } from '../entreprise.service';
-import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
+import { PersonneService } from 'src/app/personne.service';
+import { StorageService } from 'src/app/services/storage.service';
 declare var $: any;
 import Swal from 'sweetalert2';
-import { Entreprise } from '../models/entities';
 
 @Component({
-  selector: 'app-entreprise',
-  templateUrl: './entreprise.component.html',
-  styleUrls: ['./entreprise.component.css']
+  selector: 'app-add',
+  templateUrl: './add.component.html',
+  styleUrls: ['./add.component.css']
 })
-export class EntrepriseComponent {
-  entreprise: Entreprise=new Entreprise();
+export class AddComponent {
+  person: any = {};
   tokenUser?:string;
 
 
-  constructor(private entrepriseService:EntrepriseService,private storageService:StorageService,private router:Router){
+  constructor(private personneService:PersonneService,private storageService:StorageService,private router:Router){
 
   }
 
   ngOnInit(): void {
-    this.entreprise = {
-      id: 0,
-      companyname: ''
-    }
+    
   }
-
- 
 
   onSubmit() {
     
     const token = this.tokenUser;
 
-    this.entrepriseService.postData(this.entreprise, this.storageService.getUser())
+    this.personneService.postData(this.person, this.storageService.getUser())
     .subscribe({
       next: (data: any) => {
        this.alertWithSuccess()
@@ -53,4 +47,3 @@ export class EntrepriseComponent {
     Swal.fire('Succes', 'Personne enrégistré avec succès !', 'success')
   }
 }
-
