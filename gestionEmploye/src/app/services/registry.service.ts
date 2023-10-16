@@ -14,9 +14,9 @@ export class RegistryService {
 
    }
  
-   signUp(personne:Personne): Observable<Personne> {
+   signUp(personne:Personne): Observable<any> {
     console.log('methode du service qui ajoute un employe', personne);
-    return this.httpClient.post<Personne>('http://localhost:8081/api/user/sign-up',personne); 
+    return this.httpClient.post<any>(`${environment.springURL}/api/user/sign-up`,personne); 
   }
 
   login(user: User) {

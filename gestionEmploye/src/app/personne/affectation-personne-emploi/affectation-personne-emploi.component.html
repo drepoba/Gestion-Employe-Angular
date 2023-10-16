@@ -14,34 +14,55 @@
           <div class="body">
             <div class="row" style="width:100% !important; margin:auto !important;">
 
-              <div  class="col-xs-12 col-md-12" style="margin-bottom: 15px !important;">
+              <div  class="col-xs-12 col-md-3" style="margin-bottom: 15px !important;">
                 <label class="label-test" for="sltGenre">Entreprise<span class="etoile text-danger">*</span>
-                  &nbsp;
-                  <span  class="text-danger">champ vide</span>
+                 
                 </label>
-                <select [(ngModel)]="entreprise" class="form-control" id="sltGenre" name="entreprise"   required>
+                <select [(ngModel)]="entrepriseSelect" class="form-control" id="sltGenre" name="entrepriseSelect">
                   <option value="">Sélectionner l'entreprise</option>
-                  <option value=""></option>
+                  <option *ngFor="let c of entreprises" [ngValue]="c">{{c.companyname }}</option>
                 </select>
+                
               </div>
-              <div  class="col-xs-12 col-md-12" style="margin-bottom: 15px !important;">
+              <div  class="col-xs-12 col-md-3" style="margin-bottom: 15px !important;">
                   <label class="label-test" for="sltGenre">Employe<span class="etoile text-danger">*</span>
-                    &nbsp;
-                    <span  class="text-danger">champ vide</span>
+                  
                   </label>
-                  <select [(ngModel)]="employe" class="form-control" id="sltGenre" name="employe" required>
+                  <select [(ngModel)]="personneSelect" class="form-control" id="sltGenre" name="personneSelect" required>
                     <option value="">Sélectionnez personne</option>
-                    <option value=""></option>
+                    <option *ngFor="let c of personnes" [ngValue]="c">{{c.firstName }}- {{c.lastName}}</option>
                   </select>
                 </div>
-              
+                <div [class.has-error]="poste.invalid && poste.touched" [class.has-success]="poste.valid" class="col-xs-12 col-md-3" style="margin-bottom: 15px !important;">
+                    <label class="label-test" for="txtMatricule">
+                      Poste occupé<span class="etoile text-danger">*</span> &nbsp;
+                      <span *ngIf="poste.errors?.['required'] && poste.touched" class="text-danger">champ vide</span>
+                    </label>
+                    <input type="text"  [(ngModel)]="personneEntreprise.posteOccupe" class="form-control" id="txtName" name="personneEntreprise.posteOccupe"  placeholder="poste occupé" #poste="ngModel" required />
+                  </div>
+
+                  <div [class.has-error]="dateBegin.invalid && dateBegin.touched" [class.has-success]="dateBegin.valid" class="col-xs-12 col-md-3" style="margin-bottom: 15px !important;">
+                    <label class="label-test" for="dateBegin">
+                      Date Debut<span class="etoile text-danger">*</span> &nbsp;
+                      <span *ngIf="dateBegin.errors?.['required'] && dateBegin.touched" class="text-danger">champ vide</span>
+                    </label>
+                    <input type="date"  [(ngModel)]="personneEntreprise.dateBegin" class="form-control" id="txtName" name="personneEntreprise.dateBegin"  placeholder="date debut" #dateBegin="ngModel" required />
+                  </div>
+
+                  <div  class="col-xs-12 col-md-3" style="margin-bottom: 15px !important;">
+                    <label class="label-test" for="dateEnd">
+                      Date Debut<span class="etoile text-danger">*</span> &nbsp;
+                    </label>
+                    <input type="date"  [(ngModel)]="personneEntreprise.dateEnd" class="form-control" id="txtName" name="personneEntreprise.dateEnd"  placeholder="date debut"  />
+                  </div>
+                  <div class="col-xs-12 col-md-3" style="margin-bottom: 15px !important;" style="background: linear-gradient(to right, #eae4e4, #ffc80030);">
+                    <button (click)="confirmSave()"  [disabled]="!f.valid" class="modal-save-btn btn btn-outline-success"  type="button">
+                    Enregistrer
+                    </button>
+              </div>
             </div>
           </div>
-          <div class="" style="background: linear-gradient(to right, #eae4e4, #ffc80030);">
-            <button (click)="confirmSave()"  [disabled]="!f.valid" class="modal-save-btn btn btn-outline-success" id="btn-save-typeordonnateur" type="button">
-              Enregistrer
-            </button>
-          </div>
+          
         </form>
       
   

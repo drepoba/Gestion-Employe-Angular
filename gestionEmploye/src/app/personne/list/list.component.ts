@@ -19,31 +19,28 @@ export class ListComponent {
   constructor(private personneService:PersonneService,private storageService:StorageService,private router:Router){}
 
   ngOnInit(): void {
-    //  this.perService.getPersonnes().pipe(
-    //  )
-    // appele la methode getPersonne() et souscris à l'observable en initiant le tableau listePersonne
     this.listPersonnes();
+   // this.listPersonnesEmploi();
   }
 
-  listPersonnes() {
-    
-    const token = this.tokenUser;
+  
 
-    this.personneService.listData(this.storageService.getUser())
+  listPersonnes(){
+    this.personneService.getPersonnes(this.storageService.getUser())
     .subscribe({
       next: (data: any) => {
+        console.log(data);
         this.listePersonne=data;
-      this.router.navigate(['/home']);
       },
       error: (erreur: any) => {
         // Gestion des erreurs
        console.log(erreur)
       },
       complete: () => {
-        this.router.navigate(['/home']);
       }
   });
-  }
+  
+}
 
   alertWithSuccess(){
     Swal.fire('Succes', 'Personne enrégistré avec succès !', 'success')

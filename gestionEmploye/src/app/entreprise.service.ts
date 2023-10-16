@@ -12,20 +12,24 @@ export class EntrepriseService {
   private url: string = '/personne'
   constructor(private http: HttpClient) {}
 
-  getEntreprise(): Observable<Entreprise[]> {
-    return this.http.get<Entreprise[]>(this.url) ;
+  getEntreprises(token: string): Observable<Entreprise[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<Entreprise[]>(environment.springURL+"/api/entreprises/list",{ headers })
   }
 
-  getEntreprisebyId(id: number): Observable<Entreprise> {
-    return this.http.get<Entreprise>(`${this.url}/${id}`)
-  }
-
-  postEntreprise(entreprise: Entreprise): Observable<any> {
-    return this.http.post<Observable<any>>(`${this.url}`,entreprise)
+  getEntreprisebyId(id: number,token: string): Observable<Entreprise> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<Entreprise>(`${this.url}/${id}`,{ headers })
   }
 
   putEntreprise(entreprise: Entreprise , id: number): Observable<any> {
-    return this.http.put<Observable<any>>(`${this.url}/${id}`,entreprise)
+    return this.http.put<Observable<any>>(`${this.url}/${id}`,entreprise,)
   }
 
   deletentreprise(id: number): Observable<any> {

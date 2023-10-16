@@ -49,9 +49,9 @@ export class LoginComponent {
        this.isLoggedIn = true;
        this.router.navigate(['/home']);
      }, error: err => {
+       this.alertWithErreur();
        this.errorMessage = err.error.message;
        this.isLoginFailed = true;
-       this.alertWithErreur();
      }
     })
    console.log(this.form?.value)

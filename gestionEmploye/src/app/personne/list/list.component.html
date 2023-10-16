@@ -23,15 +23,15 @@
                 <tr *ngIf="listePersonne.length == 0">
                   <td colspan="5">Il y'a aucune donnée dans votre système</td>
                 </tr>
-                <div *ngIf="listePersonne.length != 0">
-                  <tr  *NgFor="let persone in listePersonne " >
+                <ng-container *ngIf="listePersonne.length != 0">
+                  <tr  *ngFor="let persone of listePersonne " >
                     <td >{{persone.id}}</td>
-                    <td >{{persone.fistName}}</td>
+                    <td >{{persone.firstName}}</td>
                     <td >{{persone.lastName}}</td>
                     <td >{{persone.dateOfBirth}}</td>
-                    <td >{{persone.postActuel}}</td>
+                    <td >{{persone.posteActuel}}</td>
                   </tr>
-                </div>
+                </ng-container>
   
                </tbody>
              </table>

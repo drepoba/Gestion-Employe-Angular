@@ -36,9 +36,14 @@ export class SignupComponent {
       }
     }
   }
- 
-  alertWithSuccess(){
-    Swal.fire('Enrégistré', 'Enregistrement effectué !', 'success')
+
+  alertWithSuccess() {
+    Swal.fire('Inscription', 'Inscription effectuée !', 'success')
+      .then((result) => {
+        if (result.isConfirmed || result.isDismissed) {
+          this.router.navigate(['/login']);
+        }
+      });
   }
 
 
@@ -47,7 +52,6 @@ export class SignupComponent {
      this.registryService.signUp(this.personne).subscribe({
       next: (data: any) => {
        this.alertWithSuccess()
-      this.router.navigate(['/login']);
       },
       error: (erreur: any) => {
         // Gestion des erreurs

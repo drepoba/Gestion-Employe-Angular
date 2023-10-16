@@ -12,10 +12,6 @@ export class PersonneService {
   private url: string = '/personne'
   constructor(private http: HttpClient) {}
 
-  getPersonnes(): Observable<Personne[]> {
-    return this.http.get<Personne[]>(this.url) ;
-  }
-
   getPersonnebyId(id: number): Observable<Personne> {
     return this.http.get<Personne>(`${this.url}/${id}`)
   }
@@ -50,7 +46,16 @@ export class PersonneService {
       'Authorization': `Bearer ${token}`
     });
 
-    return this.http.get(environment.springURL+"/api/personnes/all-persons-emplois", { headers });
+    return this.http.get<Observable<any>>(environment.springURL+"/api/personnes/all-persons-emplois", { headers });
   }
+
+  getPersonnes( token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get<Observable<Personne[]>>(environment.springURL+"/api/personnes/list-personnes", { headers });
+  } 
   
 }

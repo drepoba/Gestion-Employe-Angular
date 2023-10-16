@@ -12,11 +12,11 @@ export class Entreprise {
     companyname?:string;
 }
 
-export interface PersonneEntreprise {
+export class PersonneEntreprise {
     id:any
-    dateBegin:string;
-    dateEnd:string;
-    posteOccupe:string;
-    entreprise:Entreprise;
-    personne:Personne
+    dateBegin?:string;
+    dateEnd?:string;
+    posteOccupe?:string;
+    entreprise?:Entreprise;
+    personne?:Personne
 }
